@@ -20,6 +20,7 @@ public class JeuDeCartes {
 					new Configuration(1,new Botte(Type.ESSENCE)),
 					new Configuration(1,new Botte(Type.CREVAISON)),
 					new Configuration(1,new Botte(Type.ACCIDENT))};
+	
 
 	public String affichageJeuDeCartes() {
 		String affichage = " JEU :\n\n";
@@ -31,7 +32,7 @@ public class JeuDeCartes {
 	}
 	
 	public Carte[] donnerCartes() {
-		Carte[] cartes = new Carte[110];
+		Carte[] cartes = new Carte[106];
 		int ind = 0;
 		for (Configuration configuration : typesDeCartes) {
 			for (int i = ind; i < ind+configuration.nbExemplaires; i++) {
