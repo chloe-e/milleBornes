@@ -13,5 +13,13 @@ public class Borne extends Carte{
 		return km + "KM";
 	}
 	
+	@Override
+	public boolean equals(Object c) {
+		if(this.getClass() == c.getClass()) {
+			return this.toString().equals(c.toString());
+		}
+		return false;
+	}
+	
 	
 }

@@ -43,6 +43,11 @@ public class JeuDeCartes {
 		return cartes;
 	}
 	
+	public boolean checkCount() {
+	
+		return false;
+	}
+		
 	private static class Configuration {
 		private int nbExemplaires;
 		private Carte carte;

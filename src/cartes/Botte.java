@@ -11,5 +11,5 @@ public class Botte extends Probleme {
 		Type type = super.getType();
 		return type.getBotte();
 	}
-
+	
 }

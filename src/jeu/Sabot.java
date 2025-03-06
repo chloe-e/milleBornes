@@ -56,16 +56,16 @@ public class Sabot implements Iterable<Carte>{
 		return new Iterateur();
 	}
 
-	//------------------Classe itÃ©rateur-----------------
+	//------------------Classe itérateur-----------------
 	
 	public class Iterateur implements Iterator<Carte>{
-		private int indIterateur = nbCartes-1;
+		private int indIterateur = 0;
 		private boolean nextEffectue = false;
 		private int nbOperationsRef = nbOperations;
 		
 		@Override
 		public boolean hasNext() {
-			return indIterateur < cartes.length;
+			return indIterateur < nbCartes;
 		}
 		
 		@Override
@@ -87,11 +87,11 @@ public class Sabot implements Iterable<Carte>{
 		public void remove() {
 			verificationConcurrence();
 			if(!nextEffectue || estVide()) {
+
 				throw new IllegalStateException();
 			}
 			for (int i = indIterateur-1 ; i < nbCartes-1; i++) {
 				cartes[i] = cartes[i+1];
-				cartes[nbCartes-1] = null;
 			}
 			
 			nextEffectue = false;
