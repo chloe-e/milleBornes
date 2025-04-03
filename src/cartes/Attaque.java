@@ -19,4 +19,9 @@ public class Attaque extends Bataille {
 		}
 		return false;
 	}
+	
+	@Override
+	public int hashCode() {
+		return 17*getType().hashCode();
+	}
 }

@@ -7,6 +7,10 @@ public class Borne extends Carte{
 		super();
 		this.km = km;
 	}
+	
+	public int getkm() {
+		return this.km;
+	}
 
 	@Override
 	public String toString() {
@@ -21,5 +25,9 @@ public class Borne extends Carte{
 		return false;
 	}
 	
+	@Override
+	public int hashCode() {
+		return 17*km;
+	}
 	
 }

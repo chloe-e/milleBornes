@@ -19,5 +19,10 @@ public class Parade extends Bataille{
 		}
 		return false;
 	}
+	
+	@Override
+	public int hashCode() {
+		return 17*getType().hashCode();
+	}
 
 }

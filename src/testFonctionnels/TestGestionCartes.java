@@ -23,9 +23,9 @@ public class TestGestionCartes {
 		System.out.println(listeCartes);
 		System.out.println(
 				"liste melangee sans erreur ? " + GestionCartes.verifierMelange(listeCarteNonMelangee, listeCartes));
-//		listeCartes = GestionCartes.rassemberV2(listeCartes);
-//		System.out.println(listeCartes);
-//		System.out.println("liste rassembl�e sans erreur ? " + GestionCartes.verifierRassemblement(listeCartes));
+		//listeCartes = GestionCartes.rassemberV2(listeCartes);
+		System.out.println(listeCartes);
+		System.out.println("liste rassembl�e sans erreur ? " + GestionCartes.verifierRassemblement(listeCartes));
 
 	}
 

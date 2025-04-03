@@ -1,14 +1,19 @@
 package utils;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeMap;
 
 import cartes.Carte;
 
@@ -63,9 +68,34 @@ public class GestionCartes <T> {
 		return true;
 	}
 	
+	
+	
 	public static <T> List<T> rassembler(List<T> liste){
-		//hash map pour chauqe carte 
-		return liste;
+		NavigableMap<Integer,T> cartes = new TreeMap<>();
+		for (T t : liste) {
+			cartes.put(t.hashCode(), t);
+		}
+		return new ArrayList<>(cartes.values());
+	}
+	
+	public static <T> boolean verifierRassemblement(List<T> liste) {
+		T prev = liste.get(0);
+		T next = prev;
+		Iterator<T> iterator = liste.iterator();
+		iterator.next();
+		for (Iterator<T> it = iterator; iterator.hasNext();) {
+			next = it.next();
+			if(next != prev) {
+				for (Iterator<T> iterator2 = liste.iterator(); iterator2.hasNext();) {
+					T t = iterator2.next();
+					if(t == prev) {
+						return false;
+					}
+				}
+			}
+			prev = it.next();
+		}
+		return true;
 	}
 	
 	
