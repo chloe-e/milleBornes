@@ -1,6 +1,7 @@
 package cartes;
 
 public class Borne extends Carte{
+	
 	private int km;
 
 	public Borne(int km) {
@@ -19,7 +20,7 @@ public class Borne extends Carte{
 	
 	@Override
 	public boolean equals(Object c) {
-		if(this.getClass() == c.getClass()) {
+		if(c != null && this.getClass() == c.getClass()) {
 			return this.toString().equals(c.toString());
 		}
 		return false;

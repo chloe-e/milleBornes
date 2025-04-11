@@ -3,6 +3,8 @@ package testFonctionnels;
 import cartes.Attaque;
 import cartes.Borne;
 import cartes.Carte;
+import cartes.DebutLimite;
+import cartes.FinLimite;
 import cartes.Parade;
 import cartes.Type;
 
@@ -18,5 +20,11 @@ public class TestMethodEquals {
 		
 		Carte carteFeuxVert = new Parade(Type.FEU);
 		System.out.println("La carte feu rouge et la carte feu vert sont identiques ? " + carteFeuxRouge1.equals(carteFeuxVert));
+		
+		Carte debutLimite = new DebutLimite();
+		Carte debutLimite2 = new DebutLimite();
+		System.out.println("Deux cartes de limites sont identiques ? " + debutLimite.equals(debutLimite2));
+		
+	
 	}
 }

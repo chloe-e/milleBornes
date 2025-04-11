@@ -35,14 +35,19 @@ public class GestionCartes <T> {
 		return element;
 	}
 	
-//	public T extraireIt(T[] liste){
-//		int ind = rand.nextInt(liste.length-1);
-//		ListIterator<T> iterator = liste.listIterator();
-//		for (int i = 0; i < ind; i++) {
-//			iterator.next();
-//		}
-//		iterator.remove();
-//	}
+	public T extraireIt(List<T> liste){
+		int ind = rand.nextInt(liste.size() - 1);
+		ListIterator<T> iterator = liste.listIterator();
+		
+		for (int i = 0; i < ind; i++) {
+			iterator.next();
+		}
+		
+		T elt = iterator.next();
+		iterator.remove();
+		
+		return elt;
+	}
 
 	public static <T> List<T> melanger(List<T> liste) {
 		List<T> liste2 = liste;
@@ -69,26 +74,39 @@ public class GestionCartes <T> {
 	}
 	
 	
-	
 	public static <T> List<T> rassembler(List<T> liste){
-		NavigableMap<Integer,T> cartes = new TreeMap<>();
-		for (T t : liste) {
-			cartes.put(t.hashCode(), t);
+		List<T> listeRassemblee = new ArrayList<>();
+		listeRassemblee.add(liste.get(0));
+		T cur;
+		boolean trouve = false;
+		
+		for (int i = 1; i < liste.size(); i++) {
+			cur = liste.get(i);
+			trouve = false;
+			for(int j=0; j<listeRassemblee.size() && !trouve; j++) {
+				if(cur.equals(listeRassemblee.get(j))) {
+					listeRassemblee.add(j+1,cur);
+					trouve = true;
+				}
+			}
+			
+			if(!trouve) {
+				listeRassemblee.add(cur);
+			}
 		}
-		return new ArrayList<>(cartes.values());
+		return listeRassemblee;
 	}
 	
 	public static <T> boolean verifierRassemblement(List<T> liste) {
 		T prev = liste.get(0);
-		T next = prev;
-		Iterator<T> iterator = liste.iterator();
-		iterator.next();
-		for (Iterator<T> it = iterator; iterator.hasNext();) {
+		T next;
+		
+		for (ListIterator<T> it = liste.listIterator(); it.hasNext();) {
 			next = it.next();
-			if(next != prev) {
-				for (Iterator<T> iterator2 = liste.iterator(); iterator2.hasNext();) {
+			if(!next.equals(prev)) {
+				for (ListIterator<T> iterator2 = liste.listIterator(it.nextIndex()); iterator2.hasNext();) {
 					T t = iterator2.next();
-					if(t == prev) {
+					if(t.equals(prev)) {
 						return false;
 					}
 				}

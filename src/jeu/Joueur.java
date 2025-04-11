@@ -1,6 +1,5 @@
 package jeu;
 
-import cartes.Borne;
 import cartes.Carte;
 
 public class Joueur {
@@ -8,9 +7,10 @@ public class Joueur {
 	private ZoneDeJeu zone;
 	private MainJoueur main;
 	
-	public Joueur(String nom, ZoneDeJeu zone,) {
+	public Joueur(String nom, ZoneDeJeu zone, MainJoueur main) {
 		this.nom = nom;
 		this.zone = zone;
+		this.main = main;
 	}
 	
 	@Override
@@ -19,12 +19,13 @@ public class Joueur {
 	}
 	
 	@Override
-	public boolean equals(Object j) {
-		if(j instanceof Joueur) {
-			return nom.equals(j.toString());
+	public boolean equals(Object o) {
+		if(o instanceof Joueur joueur) {
+			return nom.equals(joueur.toString());
 		}
 		return false;
 	}
+	
 	public String toString() {
 		return nom;
 	}
@@ -33,24 +34,27 @@ public class Joueur {
 		return main;
 	}
 	
-	public void recevoir(Carte c) {
+	public void donner(Carte c) {
 		main.prendre(c);
 	}
 	
-	public void donner(Carte c, Joueur j) {
-		j.recevoir(c);
-		main.jouer(c);
-	}
-	
 	Carte prendreCarte(Sabot sabot) {
+		
 		if(sabot.estVide()) {
 			return null;
 		}
+		
 		Carte cartePiochee = sabot.piocher();
 		main.prendre(cartePiochee);
+		
+		return cartePiochee;
 	}
 	
 	public int donnerKmParcourus() {
 		return zone.donnerKmParcourus();
+	}
+	
+	public void deposer(Carte c) {
+		zone.deposer(c);
 	}
 }

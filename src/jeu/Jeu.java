@@ -15,6 +15,6 @@ public class Jeu {
 		JeuDeCartes jdc = new JeuDeCartes();
 		List<Carte> listeCartes = new ArrayList<>(Arrays.asList(jdc.donnerCartes()));
 		listeCartes = GestionCartes.melanger(listeCartes);
-		sabot = new Sabot((Carte[]) listeCartes.toArray());
+		sabot = new Sabot(listeCartes.toArray(new Carte[0]));
 	}
 }
