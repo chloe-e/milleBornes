@@ -1,6 +1,7 @@
 package jeu;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import cartes.Attaque;
@@ -12,10 +13,11 @@ public class Coup {
 	private Joueur joueurCible;
 	private Carte carteJouee;
 	
-	public Coup(Joueur joueurCourant, Joueur joueurCible, Carte carteJouee) {
+	public Coup(Joueur joueurCourant, Carte carteJouee, Joueur joueurCible) {
 		this.joueurCourant = joueurCourant;
-		this.joueurCible = joueurCible;
+		
 		this.carteJouee = carteJouee;
+		this.joueurCible = joueurCible;
 	}
 
 	public Joueur getJoueurCourant() {
@@ -31,10 +33,15 @@ public class Coup {
 	}
 	
 	public boolean estValide() {
-		if (carteJouee instanceof Attaque || carteJouee instanceof DebutLimite) {
-			return !joueurCible.equals(joueurCourant);
+		if(joueurCible == null) {
+			return true;
 		}
-		return true;
+		else if (carteJouee instanceof Attaque || carteJouee instanceof DebutLimite) {
+			return !joueurCible.equals(joueurCourant) && joueurCible.getZone().estDepotAutorise(carteJouee);
+		}
+		else {
+			return joueurCible.equals(joueurCourant) && joueurCourant.getZone().estDepotAutorise(carteJouee);
+		}
 	}
 	
 	@Override
@@ -53,10 +60,16 @@ public class Coup {
 			+ carteJouee.hashCode());
 	}
 	
-	public Set<Coup> coupsPossibles(Set<Joueur> participants){
-		Set<Coup> coupsPossibles = new HashSet<>();
-		for (Joueur joueur : participants) {
-			for(Carte carte : joueurCourant.getMain())
+	@Override 
+	public String toString() {
+		StringBuilder sb = new StringBuilder(joueurCourant.toString() + " ");
+		if(joueurCible!=null) { 
+			sb.append("depose la carte " + carteJouee.toString()
+				+ " dans la zone de jeu de " + joueurCible.toString() + ".\n");
 		}
+		else {
+			sb.append("defausse la carte " + carteJouee.toString() + ".\n");
+		}
+		return sb.toString();
 	}
 }

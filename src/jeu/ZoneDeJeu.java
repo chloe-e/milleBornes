@@ -19,6 +19,23 @@ public class ZoneDeJeu {
 	private List<Bataille> pileBatailles = new ArrayList<>();
 	private List<Borne> pileBornes = new ArrayList<>();
 	private List<Botte> listeBottes = new ArrayList<>();
+	
+
+	public List<Limite> getPileLimites() {
+		return pileLimites;
+	}
+
+	public List<Bataille> getPileBatailles() {
+		return pileBatailles;
+	}
+
+	public List<Borne> getPileBornes() {
+		return pileBornes;
+	}
+
+	public List<Botte> getListeBottes() {
+		return listeBottes;
+	}
 
 	public int donnerLimitationVitesse() {
 
@@ -121,7 +138,6 @@ public class ZoneDeJeu {
 	}
 	
 	public boolean estDepotAutorise(Carte carte) {
-		assert carte != null;
 		if(carte instanceof Borne borne) {
 			return estDepotBorneAutorise(borne);
 		}
